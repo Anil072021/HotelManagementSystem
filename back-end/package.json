@@ -1,0 +1,19 @@
+{
+  "name": "hotel-management",
+  "version": "1.0.0",
+  "description": "Back-End application for hotel-management",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.12.3",
+    "express": "^4.12.3",
+    "jsonwebtoken": "^8.5.1",
+    "mongodb": "^2.2.35",
+    "nodemon": "^2.0.12",
+    "sequence": "^3.0.0"
+  }
+}

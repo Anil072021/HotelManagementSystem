@@ -56,4 +56,19 @@ router.login_user = function (req, res) {
   });
 };
 
+router.checkCredentials = function (req, res, cb) {
+  const token = req.headers["authorization"];
+  if (typeof token == "undefined") {
+    res
+      .status(401)
+      .send(JSON.stringify({ status: "error", message: "Unauthorized user" }));
+    cb(false);
+  } else {
+    req.token = token;
+    // next();
+    status = "autherized";
+    cb(status);
+  }
+};
+
 module.exports = router;

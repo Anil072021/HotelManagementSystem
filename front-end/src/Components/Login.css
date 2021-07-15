@@ -1,0 +1,19 @@
+.form-wrapper {
+    box-shadow: 5px 10px #d4d4d4;
+    border-radius: 10px;
+    padding: 40px;
+    margin-top: 50px;
+    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+    background-color: ghostwhite;
+    text-align: left;
+  }
+  .btn {
+    width: 100%;
+  }
+  .login-card {
+    min-height: 60vh;
+}
+
+.registerMessage {
+    margin-top: 3vh;
+}

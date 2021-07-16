@@ -12,11 +12,16 @@ app.use(bodyParser.json());
 app.use(function (req, res, next) {
   let cmd = req.body.cmd;
   if (cmd && config.ignoreApis.indexOf(cmd) != -1) {
-    console.log("cmd comming here");
     next();
     return;
   }
-  // controller.checkCre(req, res);
+  controller.checkCredentials(req, res, (status) => {
+    console.log("cmd comming here");
+    if (!status) {
+      return;
+    }
+    next();
+  });
 });
 
 app.get("/", (req, res) => {

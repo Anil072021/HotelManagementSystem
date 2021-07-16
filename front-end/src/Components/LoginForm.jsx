@@ -5,6 +5,7 @@ import BookingForm from './BookingForm';
 import Registration from './Registration';
 import Home from './Home';
 import Navigation from './Navigation';
+import {Redirect} from 'react-router-dom';
 
 class LoginForm extends Component {
     constructor(props) {
@@ -21,7 +22,8 @@ class LoginForm extends Component {
         email: "",
         password: "",
         isExit: false,
-        errorMessage: ''
+        errorMessage: '',
+        isRedirectohome:false
     }
 
     getData = (event) => {
@@ -42,7 +44,8 @@ class LoginForm extends Component {
         event.preventDefault();
         this.setState({
             userData: { password: this.state.password, email: this.state.email },
-            errorMessage: ''
+            errorMessage: '',
+            isRedirectohome:true
         })
 
         let requestObj = {
@@ -79,17 +82,17 @@ class LoginForm extends Component {
 
 
     render() {
-        if (this.state.isExit === true) {
-            console.log('this.state.isExit', this.state.isExit);
+        if (this.state.isRedirectohome === true) {
+            // console.log('this.state.isExit', this.state.isExit);
             // const { history } = this.props;
             // if(history) history.push('/Home');
-            return <BookingForm />
+            return <Redirect  to="/Home" />
 
         } else {
             return (
                 <div>
                     <div >
-                        <Navigation />
+                        {/* <Navigation /> */}
                     </div>
                     <div className="jumbotron " >
                         <div className="container">

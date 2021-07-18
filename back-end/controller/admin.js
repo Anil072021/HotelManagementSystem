@@ -28,7 +28,6 @@ router.register_user = function (req, res) {
 
 router.login_user = function (req, res) {
   let ip = req.body.params;
-  console.log("controller");
   if (!ip.email && !ip.password) {
     res.status(200).send(
       JSON.stringify({
@@ -38,23 +37,35 @@ router.login_user = function (req, res) {
     );
   }
   model.login_user(ip, (err, resp) => {
+    console.log("err", err);
     if (err) {
       res.status(200).send(
         JSON.stringify({
           status: "error",
-          message: "Could not be submit the query",
+          message: "Invalid Credentials",
         })
       );
     } else {
-      res.status(200).send(
-        JSON.stringify({
-          status: "success",
-          result: { data: resp, token: resp.token },
-        })
-      );
+      if (resp === null) {
+        res.status(200).send(
+          JSON.stringify({
+            status: "success",
+            message: "Invalid Credentials",
+          })
+        );
+      } else {
+        res.status(200).send(
+          JSON.stringify({
+            status: "success",
+            result: resp,
+          })
+        );
+      }
     }
   });
 };
+
+//{ data: resp, token: resp.token }
 
 router.checkCredentials = function (req, res, cb) {
   const token = req.headers["authorization"];

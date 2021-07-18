@@ -56,28 +56,22 @@ exports.login_user = function (ip, cb) {
       });
     })
     .then(function (next) {
-      var password = encriptPassword(ip.password);
-      db.user
-        .find({ email: ip.email, password: password })
-        .toArray(function (err, res) {
-          console.log("checking", res, err);
-          if (err && err === null) {
-            err = "Invalid Credentials";
-            cb(null, err);
+      ip.password = encriptPassword(ip.password);
+      db.user.findOne(
+        { email: ip.email, password: ip.password },
+        (err, res) => {
+          if (res && res != null) {
+            jwt.sign({ user_name: res.user_name }, "oillirb", (err, token) => {
+              if (!err) {
+                res.token = token;
+                cb(null, res);
+              }
+            });
           } else {
-            if (res.length > 0) {
-              jwt.sign(
-                { user_name: res.user_name },
-                "oillirb",
-                (err, token) => {
-                  res.token = token;
-                  cb(null, res);
-                }
-              );
-              // cb(null, res);
-            }
+            cb(err, null);
           }
-        });
+        }
+      );
     });
 };
 

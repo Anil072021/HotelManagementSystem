@@ -18,6 +18,10 @@
 .registerMessage {
     margin-top: 3vh;
 }
-.mt-20{
-  margin-top: 10vh;
+.mt-10{
+  margin-top: 5vh;
+}
+
+.mb-10{
+    margin-bottom: 4vh;
 }

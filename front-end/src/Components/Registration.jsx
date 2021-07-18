@@ -1,16 +1,17 @@
-import React,{Component} from "react";
+import React, { Component } from "react";
 import ReactFormInputValidation, { Lang } from "react-form-input-validation";
 // import './register.css'
 // import home from "./home";
 // import Home from "./home";
 import LoginForm from "./LoginForm";
-import {Redirect} from 'react-router-dom';
+import Navigation from './Navigation';
+import { Redirect } from 'react-router-dom';
 
 class Registration extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
 
-        this.state = { 
+        this.state = {
             fields: {
                 username: '',
                 // lastname: '',
@@ -20,14 +21,14 @@ class Registration extends Component {
                 // password_confirmation: ''
             },
             // password_confirmation:'',
-            errors : '',
+            errors: '',
             isExit: false,
             // confirmPasswordErr: '',
             isInvalid: true,
-            isRedirectohome:false
+            isRedirectohome: false
         }
-  
-      
+
+
 
 
         this.form = new ReactFormInputValidation(this);
@@ -59,13 +60,13 @@ class Registration extends Component {
             // Do you ajax calls here.  
             console.log('field', fields);
             this.setState({
-                isRedirectohome:true
+                isRedirectohome: true
             })
-      
+
         }
-        
+
     }
-  
+
 
     // handleBlur = (event) => {
     //     let password = this.state.fields.password;
@@ -78,81 +79,91 @@ class Registration extends Component {
     //         this.setState({confirmPasswordErr: '', isInvalid: false});
     //     }
     // }   
-    
+
     // handleChange = (event) => {
     //     this.setState({password_confirmation: event.target.value})
     //     console.log('password',this.state.fields.password);
     // } 
-    
-    render() { 
-        
-if(this.state.isRedirectohome === true){
-    return <Redirect  to="/LoginForm/" />
-}
 
-else{
-        return ( 
-            <div className="col-md-4 offset-md-3">
-                
-                <div className="col-md-12 " >
-                     <h1>Registration Page</h1>
-             </div>
-<br/>
+    render() {
 
+        if (this.state.isRedirectohome === true) {
+            return <Redirect to="/LoginForm/" />
+        }
 
-                <form onSubmit={this.form.handleSubmit} autoComplete="off">
-                    <div className = "form-group mb-3">
-                        <label  className="form-label">Name<span className="text-danger">*</span></label>
-                        <input type="text" placeholder = "Enter Name"  className="form-control" id="username" name="username" onBlur={this.form.handleBlurEvent} onChange={this.form.handleChangeEvent} value={this.state.fields.username} data-attribute-name="name" />
-
-                        <small className="errors">
-                            {this.state.errors.username ? this.state.errors.username : ""}
-                        </small>
-                    </div>
-
-                   
-                    <div className = "form-group mb-3">
-                        <label  htmlFor="email" className="form-label" >Email<span className="text-danger">*</span></label>
-                        <input type="email" placeholder = "Enter Email"  className="form-control" id="email" name="email" onBlur={this.form.handleBlurEvent} onChange={this.form.handleChangeEvent} value={this.state.fields.email} data-attribute-name="Email"/>
-
-                        <small className="error">
-                            {this.state.errors.email ? this.state.errors.email : ""}
-                        </small>
-                    </div>
-                    <div className = "form-group mb-3">
-                        <label  htmlFor="mobile_no" className="form-label" >Mobile<span className="text-danger">*</span></label>
-                        <input type="tel" placeholder = "Enter Mobile Number"  className="form-control" id="mobile_no" name="mobile_no" onBlur={this.form.handleBlurEvent} onChange={this.form.handleChangeEvent} value={this.state.fields.mobile} data-attribute-name="Mobile number"/>
-
-                           <small className="error">
-                            {this.state.errors.mobile_no ? this.state.errors.mobile_no : ""}
-                        </small>
-                    </div>
-                    <div className = "form-group mb-3">
-                        <label  htmlFor="password" className="form-label">Password<span className="text-danger">*</span></label>
-                        <input type="password" placeholder = "Enter password" className="form-control" id="password" name="password" onBlur={this.form.handleBlurEvent} onChange={this.form.handleChangeEvent} value={this.state.fields.password} data-attribute-name="Password" />
-
-                        <small className="error">
-                            {this.state.errors.password ? this.state.errors.password : ""}
-                        </small>
-                    </div>
-                   {/* <div className="mb-3">
-                        <label htmlFor="password_confirmation" className="form-label">Confirm Password</label>
-                        <input type="password" className="form-control" id="password_confirmation" name="password_confirmation" onBlur={this.handleBlur} onChange={this.handleChange} value={this.state.password_confirmation} data-attribute-name="Confirm password" confirmed/>
-
-                         <small className="error">
-                            {this.state.errors.password_confirmation  ? this.state.errors.password_confirmation  : ""}
-                        </small>
-                         <small className="error">
-                            {this.state.confirmPasswordErr  ? this.state.confirmPasswordErr  : ""}
-                        </small>
+        else {
+            return (
+                <div>
+                    {/* <div >
+                        <Navigation />
                     </div> */}
-                    <button type="submit" className="btn btn-primary mt-3" >Submit</button>
-                    </form>
-            </div>
-        )
-                }
-                }
-    
+                    <div className="jumbotron " >
+                        <div className="container">
+                            <div className="row justify-content-center">
+                                <div className="col-lg-4 col-sm-8">
+                                    <div className="form-wrapper">
+                                        <h6 className="mb-4 border-bottom pb-2"><b>Enter your details here to signUp</b></h6>
+
+
+                                        <form onSubmit={this.form.handleSubmit} autoComplete="off">
+                                            <div className="form-group mb-3">
+                                                <label className="form-label">Name<span className="text-danger">*</span></label>
+                                                <input type="text" placeholder="Enter Name" className="form-control" id="username" name="username" onBlur={this.form.handleBlurEvent} onChange={this.form.handleChangeEvent} value={this.state.fields.username} data-attribute-name="name" />
+
+                                                <small className="errors">
+                                                    {this.state.errors.username ? this.state.errors.username : ""}
+                                                </small>
+                                            </div>
+
+
+                                            <div className="form-group mb-3">
+                                                <label htmlFor="email" className="form-label" >Email<span className="text-danger">*</span></label>
+                                                <input type="email" placeholder="Enter Email" className="form-control" id="email" name="email" onBlur={this.form.handleBlurEvent} onChange={this.form.handleChangeEvent} value={this.state.fields.email} data-attribute-name="Email" />
+
+                                                <small className="error">
+                                                    {this.state.errors.email ? this.state.errors.email : ""}
+                                                </small>
+                                            </div>
+                                            <div className="form-group mb-3">
+                                                <label htmlFor="mobile_no" className="form-label" >Mobile<span className="text-danger">*</span></label>
+                                                <input type="tel" placeholder="Enter Mobile Number" className="form-control" id="mobile_no" name="mobile_no" onBlur={this.form.handleBlurEvent} onChange={this.form.handleChangeEvent} value={this.state.fields.mobile} data-attribute-name="Mobile number" />
+
+                                                <small className="error">
+                                                    {this.state.errors.mobile_no ? this.state.errors.mobile_no : ""}
+                                                </small>
+                                            </div>
+                                            <div className="form-group mb-3">
+                                                <label htmlFor="password" className="form-label">Password<span className="text-danger">*</span></label>
+                                                <input type="password" placeholder="Enter password" className="form-control" id="password" name="password" onBlur={this.form.handleBlurEvent} onChange={this.form.handleChangeEvent} value={this.state.fields.password} data-attribute-name="Password" />
+
+                                                <small className="error">
+                                                    {this.state.errors.password ? this.state.errors.password : ""}
+                                                </small>
+                                            </div>
+                                            {/* <div className="mb-3">
+                                                <label htmlFor="password_confirmation" className="form-label">Confirm Password</label>
+                                                <input type="password" className="form-control" id="password_confirmation" name="password_confirmation" onBlur={this.handleBlur} onChange={this.handleChange} value={this.state.password_confirmation} data-attribute-name="Confirm password" confirmed />
+
+                                                <small className="error">
+                                                    {this.state.errors.password_confirmation ? this.state.errors.password_confirmation : ""}
+                                                </small>
+                                                <small className="error">
+                                                    {this.state.confirmPasswordErr ? this.state.confirmPasswordErr : ""}
+                                                </small>
+                                            </div> */}
+                                            <button type="submit" className="btn btn-primary mt-3" >Submit</button>
+                                        </form>
+                                        <div className="registerMessage"><a href='http://localhost:4000/' className="loginText" >Go to home </a></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )
+        }
+    }
+
 }
- 
+
 export default Registration;

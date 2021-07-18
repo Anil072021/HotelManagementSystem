@@ -4,10 +4,12 @@ import {
   Switch,
   Route,
 } from 'react-router-dom';
+import BookingForm from './BookingForm';
 
 import Home from './Home';
 import LoginForm from './LoginForm';
 import Registration from './Registration';
+//import BookingForm from './BookingForm';
 
 class RouterComp extends Component {
     state = {  
@@ -20,6 +22,7 @@ class RouterComp extends Component {
                     <Route exact path='/' component={Home}></Route>
                     <Route  path='/LoginForm' component={LoginForm}></Route>
                     <Route  path='/Registration' component={Registration}></Route>
+                     <Route  path='/BookingForm' component={BookingForm}></Route> 
                 </Switch>
             </Router>
          );

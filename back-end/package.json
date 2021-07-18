@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.12.3",
+    "cors": "^2.8.5",
     "express": "^4.12.3",
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^2.2.35",

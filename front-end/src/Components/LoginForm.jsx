@@ -2,104 +2,75 @@ import React, { Component } from 'react';
 import './Login.css';
 import axios from "axios";
 import BookingForm from './BookingForm';
-import Registration from './Registration';
 import Home from './Home';
-import Navigation from './Navigation';
-import {Redirect} from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 class LoginForm extends Component {
     constructor(props) {
         super(props);
     }
     state = {
-        listOfUsers: [],
-
-        userData: {
-            email: "",
-            password: ""
-        },
-
         email: "",
         password: "",
         isExit: false,
         errorMessage: '',
-        isRedirectohome:false
     }
 
     getData = (event) => {
+
         this.setState({ [event.target.name]: event.target.value })
+        console.log("state", this.state.email, this.state.password);
     }
-
-    readData = () => {
-        axios.get("http://localhost:3006/user1")
-            .then((response) => {
-                this.setState({ listOfUsers: response.data });
-                console.log(this.state.listOfUsers);
-            })
-    }
-
 
 
     handleSubmit = (event) => {
         event.preventDefault();
+        console.log("credentials", this.state.email, this.state.password);
         this.setState({
             userData: { password: this.state.password, email: this.state.email },
-            errorMessage: '',
-            isRedirectohome:true
+            errorMessage: ''
         })
+        sessionStorage.setItem('data', "tokenValue")
 
         let requestObj = {
             cmd: "login_user",
-            params: this.userData
+            params: { email: this.state.email, password: this.state.password }
         }
 
+        console.log("in loginform", requestObj);
+        axios.post("http://localhost:3636/web", requestObj)
+            .then((response) => {
+                console.log("sttausaaa", response.data.result)
+                if (response.data.status === 'success') {
+                    let data = response.data.result.data;
+                    console.log("checking", data);
+                    if (data.length > 0) {
+                        localStorage.setItem('authorization', response.data.result.token);
+                        localStorage.setItem('email', data[0].email);
+                        localStorage.setItem('user_name', data[0].user_name);
+                        this.setState({ isExit: true });
+                    }
+                } else {
+                    this.setState({ errorMessage: 'invalid credentials' });
+                }
 
-        // axios.post("http://localhost:3006/login", requestObj)
-        //     .then((response) => {
-        //         this.setState({ listOfUsers: response.data });
-        //         console.log(this.state.listOfUsers);
-        //     })
-
-
-        let getUser = this.state.listOfUsers.filter((user) => {
-            return (user.password === this.state.password && user.email === this.state.email)
-        });
-
-        if (getUser.length > 0) {
-            this.setState({
-                isExit: true,
-                errorMessage: ''
-            });
-        } else {
-            this.setState({ errorMessage: 'Invalid credentials' });
-        }
-    }
-
-    componentDidMount() {
-        this.readData();
-
+            })
     }
 
 
     render() {
-        if (this.state.isRedirectohome === true) {
-            // console.log('this.state.isExit', this.state.isExit);
-            // const { history } = this.props;
-            // if(history) history.push('/Home');
-            return <Redirect  to="/Home" />
+        if (this.state.isExit === true) {
+            return <Redirect to='/' />
 
         } else {
             return (
                 <div>
-                    <div >
-                        {/* <Navigation /> */}
-                    </div>
-                    <div className="jumbotron " >
+                    <div className="jumbotron mt-20" >
                         <div className="container">
                             <div className="row justify-content-center">
                                 <div className="col-lg-4 col-sm-8">
                                     <div className="form-wrapper">
-                                        <h4 className="mb-4 border-bottom pb-2">Enter your details</h4>
+                                        <h4 className="mb-4 border-bottom pb-2">Login Now</h4>
                                         {
                                             this.state.errorMessage !== '' ?
                                                 <div className="alert alert-danger alert-sm">{this.state.errorMessage}</div>
@@ -115,12 +86,13 @@ class LoginForm extends Component {
                                                 <label htmlFor="password" className="form-label">Password</label>
                                                 <input type="password" name="password" className="form-control" id="password" onChange={this.getData} />
                                             </div>
-                                            <button type="submit" className="btn btn-secondary" >Login</button>
+                                            <button type="submit" className="btn btn-secondary" >SignIn</button>
                                         </form>
                                         <div className="registerMessage">
                                             <span>New User? </span>
-                                            <a href='http://localhost:4000/registration' className="loginText" >Register</a>
+                                            <a href='http://localhost:4000/registration' className="loginText" >SignUp </a>
                                         </div>
+                                        <div className="registerMessage"><a href='http://localhost:4000/' className="loginText" >Go to home </a></div>
                                     </div>
                                 </div>
                             </div>

@@ -1,4 +1,12 @@
 {
     "dburl":"mongodb://127.0.0.1:27017/",
-    "ignoreApis":["login_user"]
+    "ignoreApis":["login_user","register_user"],
+    "email":{
+        "smpt":"smpt.mailgun.org",
+        "apikey":"",
+        "apiUrl":"",
+        "password":"",
+        "smptlogin":"",
+        "domain":""
+    }
 }

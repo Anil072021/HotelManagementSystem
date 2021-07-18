@@ -56,28 +56,95 @@ exports.login_user = function (ip, cb) {
       });
     })
     .then(function (next) {
-      ip.password = encriptPassword(ip.password);
+      var password = encriptPassword(ip.password);
       db.user
-        .find({ email: ip.email, password: ip.password })
+        .find({ email: ip.email, password: password })
         .toArray(function (err, res) {
-          if (err) {
+          console.log("checking", res, err);
+          if (err && err === null) {
+            err = "Invalid Credentials";
             cb(null, err);
           } else {
-            // if (res) {
-            //   jwt.sign({ email: ip.eamil }, "oillirb", (err, token) => {
-            //     console.log(token, "token");
-            //     res["token"] = token;
-            //   });
-            //   cb(null, res);
-            // }
-            next(res);
+            if (res.length > 0) {
+              jwt.sign(
+                { user_name: res.user_name },
+                "oillirb",
+                (err, token) => {
+                  res.token = token;
+                  cb(null, res);
+                }
+              );
+              // cb(null, res);
+            }
           }
         });
+    });
+};
+
+exports.getHotels = function (ip, cb) {
+  var db;
+  var seq = sequence.create();
+  seq
+    .then(function (next) {
+      database.getdb(function (err, dbref) {
+        if (err) {
+          process.exit(1);
+        } else {
+          db = dbref;
+          next();
+        }
+      });
+    })
+    .then(function (next) {
+      console.log("hotels");
+      db.hotels.find({}).toArray(function (err, res) {
+        if (err) {
+          cb(null, err);
+        } else {
+          cb(null, res);
+        }
+      });
+    });
+};
+
+exports.hotel_booking = (ip, cb) => {
+  var db;
+  var seq = sequence.create();
+  seq
+    .then(function (next) {
+      database.getdb(function (err, dbref) {
+        if (err) {
+          process.exit(1);
+        } else {
+          db = dbref;
+          next();
+        }
+      });
+    })
+    .then(function (next) {
+      var id = ObjectID(ip.id);
+      db.user.find({ _id: id }).toArray(function (err, res) {
+        if (err) {
+          cb(null, err);
+        } else {
+          if (res.length > 0) {
+            next(res);
+          } else {
+            cb(null, "");
+          }
+        }
+      });
     })
     .then(function (next, res) {
-      jwt.sign({ user_name: res.user_name }, "oillirb", (err, token) => {
-        res.token = token;
-        cb(null, res);
+      // console.log("res", res);
+      ip.check_in_time = new Date(ip.check_in_time);
+      ip.check_out_time = new Date(ip.check_out_time);
+      db.booking_details.save(ip, function (err, res) {
+        if (err) {
+          cb(null, err);
+        } else {
+          cb(null, res);
+        }
       });
     });
 };

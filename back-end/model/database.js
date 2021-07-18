@@ -16,6 +16,8 @@ database.getdb = function (next) {
         dbref = {
           db: db,
           user: db.collection("user"),
+          hotels: db.collection("hotels"),
+          booking_details: db.collection("booking_details"),
         };
         db.collection("user").createIndex(
           { email: 1, phone_number: 1 },

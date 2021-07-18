@@ -16,7 +16,7 @@ app.use(function (req, res, next) {
     return;
   }
   controller.checkCredentials(req, res, (status) => {
-    console.log("cmd comming here");
+    console.log("cmd comming here", status);
     if (!status) {
       return;
     }

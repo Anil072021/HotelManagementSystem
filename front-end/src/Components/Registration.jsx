@@ -6,6 +6,7 @@ import ReactFormInputValidation, { Lang } from "react-form-input-validation";
 import LoginForm from "./LoginForm";
 import Navigation from './Navigation';
 import { Redirect } from 'react-router-dom';
+import axios from "axios";
 
 class Registration extends Component {
     constructor(props) {
@@ -25,7 +26,8 @@ class Registration extends Component {
             isExit: false,
             // confirmPasswordErr: '',
             isInvalid: true,
-            isRedirectohome: false
+            isRedirectohome: false,
+            errorMessage:''
         }
 
 
@@ -59,9 +61,26 @@ class Registration extends Component {
         this.form.onformsubmit = (fields) => {
             // Do you ajax calls here.  
             console.log('field', fields);
-            this.setState({
-                isRedirectohome: true
+            var reqObj = {
+                cmd:"register_user",
+                params:fields
+            }
+            console.log("reqObj",reqObj)
+            axios({
+                method: 'post',
+                url: 'http://localhost:3636/web',
+                data: reqObj
+            }).then((response)=>{
+                console.log("response",response);
+                if(response.data.status === 'success'){
+                    this.setState({
+                        isRedirectohome: true
+                    })
+                } else {
+                     this.setState({ errorMessage: "You Couldn't register into our system." });
+                }
             })
+            
 
         }
 
@@ -104,7 +123,11 @@ class Registration extends Component {
                                     <div className="form-wrapper">
                                         <h6 className="mb-4 border-bottom pb-2"><b>Enter your details here to signUp</b></h6>
 
-
+                                        {
+                                            this.state.errorMessage !== '' ?
+                                                <div className="alert alert-danger alert-sm">{this.state.errorMessage}</div>
+                                                : ''
+                                        }
                                         <form onSubmit={this.form.handleSubmit} autoComplete="off">
                                             <div className="form-group mb-3">
                                                 <label className="form-label">Name<span className="text-danger">*</span></label>

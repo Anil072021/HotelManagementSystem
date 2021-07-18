@@ -1,13 +1,42 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 import './Home.css';
 import Navigation from './Navigation';
 import { Navbar, Nav, Container, NavDropdown } from 'react-bootstrap';
+import axios from "axios";
 
 class Home extends Component {
     state = {
-        tokenValue: sessionStorage.getItem('data')
+        tokenValue: sessionStorage.getItem('data'),
+        hotel_data:[]
     }
+
+    componentDidMount(){
+        let reqObj = {
+            cmd:"getHotels"          
+        }
+        axios({
+            method:'post',
+            url:'http://localhost:3636/web',
+            headers: {
+                'Content-Type': 'application/json',
+                'authorization': localStorage.getItem('authorization')
+            },
+            data:reqObj
+        }).then((response)=>{
+            console.log("respone",response)
+            if(response.data.status === 'success'){
+
+                this.setState({hotel_data:[...this.state.hotel_data, response.data.result]})
+            }else {
+                console.log("errror");
+            }
+        })
+        
+    }
+    
+    
     render() {
+        console.log(this.state.hotel_data);
         return (
             <div>
                 <div> <Navigation tokenData={this.state.tokenValue} /></div>

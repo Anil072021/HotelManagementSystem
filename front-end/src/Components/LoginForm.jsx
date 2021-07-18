@@ -25,11 +25,11 @@ class LoginForm extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
-        console.log("credentials", this.state.email, this.state.password);
-        this.setState({
-            userData: { password: this.state.password, email: this.state.email },
-            errorMessage: ''
-        })
+        // console.log("credentials", this.state.email, this.state.password);
+        // this.setState({
+        //     userData: { password: this.state.password, email: this.state.email },
+        //     errorMessage: ''
+        // })
         sessionStorage.setItem('data', "tokenValue")
 
         let requestObj = {
@@ -40,14 +40,14 @@ class LoginForm extends Component {
         console.log("in loginform", requestObj);
         axios.post("http://localhost:3636/web", requestObj)
             .then((response) => {
-                console.log("sttausaaa", response.data.result)
+                console.log("sttausaaa", response.data.state,response.data)
                 if (response.data.status === 'success') {
-                    let data = response.data.result.data;
+                    let data = response.data.result;
                     console.log("checking", data);
-                    if (data.length > 0) {
-                        localStorage.setItem('authorization', response.data.result.token);
-                        localStorage.setItem('email', data[0].email);
-                        localStorage.setItem('user_name', data[0].user_name);
+                    if (data) {
+                        localStorage.setItem('authorization', data.token);
+                        localStorage.setItem('email', data.email);
+                        localStorage.setItem('user_name', data.user_name);
                         this.setState({ isExit: true });
                     }
                 } else {

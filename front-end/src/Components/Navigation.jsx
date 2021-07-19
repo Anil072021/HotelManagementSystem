@@ -20,7 +20,7 @@ class Navigation extends Component {
         return (
             <div>
                 <Navbar bg="light" expand="lg" className=" nav navbar">
-                    <Navbar.Brand href="/" className="text-info"><b>BookHotels.com</b></Navbar.Brand>
+                    <Navbar.Brand href="/Home" className="text-info"><b>BookHotels.com</b></Navbar.Brand>
                     <Navbar.Toggle aria-controls="navbarScroll" />
                     <Navbar.Collapse id="navbarScroll">
                         <div className="">

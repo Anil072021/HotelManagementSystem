@@ -42,7 +42,7 @@ class Registration extends Component {
             email: 'Please enter valid email address',
             alpha_num: ':attribute must contain alpha numeric characters',
             min: ':attribute must contain atleast 8 characters',
-            numeric: ':attribute must contain only digits from 0-9',
+            numeric: ':attribute must contain only digits from 0-9 mobile starts with 7,8,9',
             digits: ':attribute must contain 10 digits',
             // confirmed: 'Password did not match'
         });

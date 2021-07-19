@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './BookingForm.css';
+// import Moment from 'react-moment';
+// import moment from 'moment';
+
 //import ReactFormInputValidation, { Lang } from "react-form-input-validation";
 class BookingForm extends Component {
     constructor(props) {
@@ -15,6 +18,7 @@ class BookingForm extends Component {
             rooms: "",
             persons: "",
             roomType: ""
+           
         },
 
         name: "",
@@ -25,9 +29,10 @@ class BookingForm extends Component {
         roomType: "",
         isExit: false,
         errorMessage: '',
+        mindate:new Date().getFullYear()+"-"+("0"+(new Date().getMonth()+1))+"-"+new Date().getDate(),
+        maxdate:new Date().getFullYear()+"-"+("0"+(new Date().getMonth()+1))+"-"+(new Date().getDate()+1)
 
     }
-
     getData = (event) => {
         this.setState({ [event.target.name]: event.target.value })
     }
@@ -42,6 +47,7 @@ class BookingForm extends Component {
     // }
 
     render() {
+        console.log(this.state.mindate,"dataaaaaaaaa")
         return (
             <div>
 
@@ -60,13 +66,13 @@ class BookingForm extends Component {
                                             <div className="col-md-6">
                                                 <div className="form-group">
                                                     <label className="form-label" ><b>Check-in</b></label>
-                                                    <input className="form-control mb-10" type="date" name="checkIn" onChange={this.getData} required />
+                                                    <input className="form-control mb-10" min={this.state.mindate}  type="date" name="checkIn" onChange={this.getData} required />
                                                 </div>
                                             </div>
                                             <div className="col-md-6">
                                                 <div className="form-group">
                                                     <label className="form-label" ><b>Check-Out</b></label>
-                                                    <input className="form-control mb-10" type="date" name="checkOut" onChange={this.getData} required />
+                                                    <input className="form-control mb-10" min={this.state.maxdate}  type="date" name="checkOut" onChange={this.getData} required />
                                                 </div>
                                             </div>
                                         </div>
@@ -97,7 +103,7 @@ class BookingForm extends Component {
                                         <div className="row">
                                             <div className="col-md-6">
                                                 <div className="form-group">
-                                                    <label className="form-label mt-10" ><b>Room type</b></label>
+                                                    <label className="form-label mt" ><b>Room type</b></label>
                                                     <select className="form-control" name="roomType" onChange={this.getData} required>
                                                         <option value="" selected hidden>Select</option>
                                                         <option>Single</option>
@@ -107,7 +113,7 @@ class BookingForm extends Component {
                                                 </div>
                                             </div>
                                         </div>
-                                        <button type="submit" className="btn btn-secondary mt-10" onSubmit={this.handleSubmit}>Book Now</button>                                    </form>
+                                        <button type="submit" className="btn btn-secondary mt" onSubmit={this.handleSubmit}>Book Now</button>                                    </form>
                                 </div>
                             </div>
                         </div>

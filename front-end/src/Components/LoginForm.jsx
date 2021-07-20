@@ -41,7 +41,7 @@ class LoginForm extends Component {
         axios.post("http://localhost:3636/web", requestObj)
             .then((response) => {
                 console.log("sttausaaa", response.data.state,response.data)
-                if (response.data.status === 'success') {
+                if (response.data.status === 'success' && response.data.message !== 'Invalid Credentials') {
                     let data = response.data.result;
                     console.log("checking", data);
                     if (data) {
@@ -50,10 +50,11 @@ class LoginForm extends Component {
                         localStorage.setItem('user_name', data.user_name);
                         this.setState({ isExit: true });
                     }
+                } else if(response.data.message === 'Invalid Credentials' && response.data.status === 'scuuess'){
+                    this.setState({ errorMessage: 'invalid credentials' });
                 } else {
                     this.setState({ errorMessage: 'invalid credentials' });
                 }
-
             })
     }
 

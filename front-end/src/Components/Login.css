@@ -21,3 +21,14 @@
 .mt-20{
   margin-top: 10vh;
 }
+
+.loginBg{
+  background-image: url("https://www.indiafilings.com/learn/wp-content/uploads/2016/02/service-tax-for-hotel.jpg");
+  /* Full height */
+  height: 100%;
+  width: 100%;
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import ReactFormInputValidation, { Lang } from "react-form-input-validation";
 // import './register.css'
 // import home from "./home";
-// import Home from "./home";
+ import "./Home.css";
 import LoginForm from "./LoginForm";
 import Navigation from './Navigation';
 import { Redirect } from 'react-router-dom';
@@ -29,8 +29,6 @@ class Registration extends Component {
             isRedirectohome: false,
             errorMessage:''
         }
-
-
 
 
         this.form = new ReactFormInputValidation(this);
@@ -112,14 +110,14 @@ class Registration extends Component {
 
         else {
             return (
-                <div>
+                <div className="registerBg">
                     {/* <div >
                         <Navigation />
                     </div> */}
                     <div className="jumbotron " >
                         <div className="container">
                             <div className="row justify-content-center">
-                                <div className="col-lg-4 col-sm-8">
+                                <div className="col-lg-6 col-sm-8">
                                     <div className="form-wrapper">
                                         <h6 className="mb-4 border-bottom pb-2"><b>Enter your details here to signUp</b></h6>
 
@@ -176,7 +174,7 @@ class Registration extends Component {
                                             </div> */}
                                             <button type="submit" className="btn btn-primary mt-3" >Submit</button>
                                         </form>
-                                        <div className="registerMessage"><a href='http://localhost:4000/' className="loginText" >Go to home </a></div>
+                                        <div className="registerMessage"><a href='/' className="loginText" >Go to home </a></div>
                                     </div>
                                 </div>
                             </div>

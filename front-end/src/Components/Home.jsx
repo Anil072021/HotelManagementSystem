@@ -1,12 +1,13 @@
 import React, { Component, useEffect } from 'react';
 import './Home.css';
 import Navigation from './Navigation';
+import Footer from './Footer';
 import { Navbar, Nav, Container, NavDropdown } from 'react-bootstrap';
 import axios from "axios";
 
 class Home extends Component {
     state = {
-        tokenValue: sessionStorage.getItem('data'),
+        tokenValue: localStorage.getItem('data'),
         hotel_data:[]
     }
 
@@ -38,15 +39,15 @@ class Home extends Component {
     render() {
         console.log(this.state.hotel_data);
         return (
-            <div>
+            <div className="bg">
                 <div> <Navigation tokenData={this.state.tokenValue} /></div>
                 <Container>
-                    <div className="container mt-50" > <section className="online-courses">
+                    <div className="container " > <section className="online-courses">
                         <div className="container">
                             <div className="row justify-content-center">
                                 <div className="col-lg-6 col-md-6">
                                     <div className="online-courses-text-widget">
-                                        <h2></h2>
+                                        <button className="btn btn-color"><b>Book Your Hotels Here</b></button>
                                         <p></p>
                                     </div>
                                 </div>
@@ -107,7 +108,7 @@ class Home extends Component {
                                 </div>
                                 <div className="col-lg-4 col-md-4">
                                     <div className="card online-course-card">
-                                        <img height="250" src="https://www.booking.com/hotel/in/novotel-mumbai-juhu-beach.en-gb.html?aid=393655&label=msn-0DxtRkUhJSjW_Paq2PbmLQ-80333103645065%3Atikwd-16659120452%3Aloc-90%3Aneo%3Amte%3Adec%3Aqshotels&sid=162bf7b8dbaef51f1776ea011911f522&dest_id=-2092174&dest_type=city&dist=0&group_adults=2&group_children=0&hapos=8&hpos=8&no_rooms=1&room1=A%2CA&sb_price_type=total&sr_order=popularity&srepoch=1626412331&srpvid=2f77249579b10089&type=total&ucfs=1&activeTab=photosGallery"  alt="" />
+                                        <img height="250" src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mzl8fGhvdGVsfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80"  alt="" />
                                         <div className="card-body">
                                             <h3 className="card-title">Lorem ipsum, dolor sit amet consectetur adipisicing elit</h3>
                                             {/* <p className="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo sequi reiciendis</p> */}
@@ -129,6 +130,7 @@ class Home extends Component {
                         </div>
                     </section></div>
                 </Container>
+                <Footer/>
             </div>
         );
     }

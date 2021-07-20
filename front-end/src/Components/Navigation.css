@@ -179,13 +179,20 @@
   .mt-10{
     margin-top:8rem !important;
   }
-  .ml-auto{
-    margin-left:25rem;
+  .ml{
+    margin-left:55rem;
   }
   .btn-small {
     padding-left: 1% !important;
  }
  
  .profileMargin{
-  margin-left:45rem;
+  margin-left:40rem;
  }
+ .mrb{
+  margin-right:20rem;
+}
+
+.bdisplay{
+  display: inline-block;
+}

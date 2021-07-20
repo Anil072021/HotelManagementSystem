@@ -30,7 +30,7 @@ class LoginForm extends Component {
         //     userData: { password: this.state.password, email: this.state.email },
         //     errorMessage: ''
         // })
-        sessionStorage.setItem('data', "tokenValue")
+        sessionStorage.setItem('data', "hotelData")
 
         let requestObj = {
             cmd: "login_user",

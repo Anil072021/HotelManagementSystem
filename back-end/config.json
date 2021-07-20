@@ -1,6 +1,6 @@
 {
     "dburl":"mongodb://127.0.0.1:27017/",
-    "ignoreApis":["login_user","register_user"],
+    "ignoreApis":["getHotels","login_user","register_user"],
     "email":{
         "smpt":"smpt.mailgun.org",
         "apikey":"",

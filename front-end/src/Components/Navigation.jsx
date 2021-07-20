@@ -20,7 +20,7 @@ class Navigation extends Component {
         return (
             <div>
                 <Navbar bg="light" expand="lg" className=" nav navbar">
-                    <Navbar.Brand href="/" className="text-info"><b>BookHotels.com</b></Navbar.Brand>
+                    <Navbar.Brand href="/Home" className="text-info"><b>BookHotels.com</b></Navbar.Brand>
                     <Navbar.Toggle aria-controls="navbarScroll" />
                     <Navbar.Collapse id="navbarScroll">
                         <div className="">
@@ -32,7 +32,7 @@ class Navigation extends Component {
                                     aria-label="Search" />
                             </Form>
                         </div>
-                        {this.props.tokenData != null ? <ul className="navbar-nav ml-auto">
+                        {localStorage.getItem("authorization") != undefined ? <ul className="navbar-nav ml-auto">
                             <li className="nav-item active">
                                 <a className="ranjith ml-auto" href="" onClick={e => this.logoutHandler(e)}>Logout</a>
                             </li>

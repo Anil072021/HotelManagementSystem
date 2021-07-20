@@ -117,10 +117,11 @@ exports.hotel_booking = (ip, cb) => {
     })
     .then(function (next) {
       var id = ObjectID(ip.id);
-      db.user.find({ _id: id }).toArray(function (err, res) {
+      db.hotels.find({ _id: id }).toArray(function (err, res) {
         if (err) {
           cb(null, err);
         } else {
+          console.log("ressss", res);
           if (res.length > 0) {
             next(res);
           } else {
@@ -130,10 +131,10 @@ exports.hotel_booking = (ip, cb) => {
       });
     })
     .then(function (next, res) {
-      // console.log("res", res);
       ip.check_in_time = new Date(ip.check_in_time);
       ip.check_out_time = new Date(ip.check_out_time);
       db.booking_details.save(ip, function (err, res) {
+        // console.log("err", err, "resp", res);
         if (err) {
           cb(null, err);
         } else {

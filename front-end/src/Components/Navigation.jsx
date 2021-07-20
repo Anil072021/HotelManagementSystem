@@ -43,19 +43,12 @@ class Navigation extends Component {
                                     aria-label="Search" />
                             </Form>
                         </div>
-                        {this.props.tokenData != null ?
-                        //  <ul className="navbar-nav">
-                        //     <li className="col-lg-2">
-                        //         <button className="btn btn-info btn ">{this.state.user_name}</button>
-                        //         <a className="ranjith ml" href="" onClick={e => this.logoutHandler(e)}>Logout</a>
-                        //     </li>
-                        // </ul>
-                        <NavDropdown title="Profile" className="profileMargin" id="basic-nav-dropdown">
-                            <NavDropdown.Item >{this.state.user_name}</NavDropdown.Item>
-                            <NavDropdown.Item onClick={e => this.logoutHandler(e)}>Logout</NavDropdown.Item>
-                        </NavDropdown>
-                         : <NavDropdown title="Signin/Signup" className="profileMargin" id="basic-nav-dropdown">
-                            <NavDropdown.Item onClick={this.handleShow}>Signin</NavDropdown.Item>
+                        {localStorage.getItem("authorization") != undefined ? <ul className="navbar-nav ml-auto">
+                            <li className="nav-item active">
+                                <a className="ranjith ml-auto" href="" onClick={e => this.logoutHandler(e)}>Logout</a>
+                            </li>
+                        </ul> : <NavDropdown title="Profile" className="profileMargin" id="basic-nav-dropdown">
+                            <NavDropdown.Item href="/LoginForm">Signin</NavDropdown.Item>
                             <NavDropdown.Item href="/Registration">Signup</NavDropdown.Item>
                         </NavDropdown>}
                     </Navbar.Collapse>

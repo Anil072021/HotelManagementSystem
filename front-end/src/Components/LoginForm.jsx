@@ -32,7 +32,7 @@ class LoginForm extends Component {
         //     userData: { password: this.state.password, email: this.state.email },
         //     errorMessage: ''
         // })
-        sessionStorage.setItem('data', "tokenValue")
+        sessionStorage.setItem('data', "hotelData")
 
         let requestObj = {
             cmd: "login_user",
@@ -43,7 +43,7 @@ class LoginForm extends Component {
         axios.post("http://localhost:3636/web", requestObj)
             .then((response) => {
                 console.log("sttausaaa", response.data.state,response.data)
-                if (response.data.status === 'success'&& response.data.message!== 'Invalid Credentials') {
+                if (response.data.status === 'success' && response.data.message !== 'Invalid Credentials') {
                     let data = response.data.result;
                     console.log("checking", data);
                     if (data) {

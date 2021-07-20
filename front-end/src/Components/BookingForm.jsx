@@ -1,24 +1,30 @@
 import React, { Component } from 'react';
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './BookingForm.css';
+import axios from 'axios';
+import { Redirect } from 'react-router-dom';
 // import Moment from 'react-moment';
 // import moment from 'moment';
 
 //import ReactFormInputValidation, { Lang } from "react-form-input-validation";
 class BookingForm extends Component {
+    id;
     constructor(props) {
         super(props)
-    }
+        let path = window.location.pathname;
+        let split = path.split('/')
+        this.id = split[2];
+    } 
 
     state = {
-        userData: {
+        bookingData: {
             name: "",
             checkIn: "",
             checkOut: "",
             rooms: "",
             persons: "",
-            roomType: ""
-           
+            roomType: "",
+           status:false
         },
 
         name: "",
@@ -37,18 +43,58 @@ class BookingForm extends Component {
         this.setState({ [event.target.name]: event.target.value })
     }
 
-    // handleSubmit = (event) => {
-    //     event.preventDefault();
-    //     this.setState({
-    //         userData: { name: this.state.password, checkIn: this.state.checkIn, checkOut: this.state.checkOut,
-    //              rooms: this.state.rooms, persons: this.state.persons, roomType: this.state.roomType },
-    //         errorMessage: ''
-    //     })
-    // }
+    handleSubmit = (event) => {
+        event.preventDefault();
+        // this.setState({
+        //     userData: { name: this.state.password, checkIn: this.state.checkIn, checkOut: this.state.checkOut,
+        //          rooms: this.state.rooms, persons: this.state.persons, roomType: this.state.roomType },
+        //     errorMessage: ''
+        // })
+        console.log("data",this.state.bookingData)
+        // let { id } = useParams();
+        var reqObj = {
+            cmd:"hotel_booking",
+            params:{
+                id:this.id,
+                user_name:localStorage.getItem('user_name'),
+                email:localStorage.getItem('email'),
+                in_the_name_of:this.state.name,
+                room_type:this.state.roomType,
+                no_of_persons:this.state.persons,
+                check_in_time:this.state.checkIn,
+                check_out_time:this.state.checkOut,
+                no_of_rooms:this.state.rooms
+            }
+        }
+        console.log("reqObj",reqObj)
+        axios({
+            method:'post',
+            url:'http://localhost:3636/web',
+            headers: {
+                'Content-Type': 'application/json',
+                'authorization': localStorage.getItem('authorization')
+            },
+            data:reqObj
+        }).then((response)=>{
+            console.log("response",response)
+            if(response.data.status === 'success'){
+                this.setState({ status: true });
+            } else {
+                console.log("err");
+            }
+        })    
+    }
 
     render() {
-        console.log(this.state.mindate,"dataaaaaaaaa")
+        if(this.state.status === true){
+            // setTimeout(()=>{
+            //     return <Redirect to='/' />
+            // },3000)
+            return <Redirect to='/' />
+        } else {
+        // console.log(this.state.mindate,"dataaaaaaaaa",window.location.pathname,this.id)
         return (
+            
             <div>
 
                 <div className="jumbotron mt-10" >
@@ -57,7 +103,13 @@ class BookingForm extends Component {
                             <div className="col-lg-8 col-sm-8">
                                 <div className="form-wrapper">
                                     <h4 className="mb-4 border-bottom pb-2">Make your Booking</h4>
-                                    <form>
+                                    { this.state.status ===true ?
+                                        <div class="alert alert-success" role="alert">
+                                         You are Booked Succesfully!.
+                                        </div> : ''
+                                    }
+                                    
+                                    <form onSubmit={this.handleSubmit}>
                                         <div className="mb-3 col-md-6">
                                             <label className="form-label" htmlFor="name"><b>In the name of</b></label>
                                             <input type="name" name="name" className="form-control" onChange={this.getData} />
@@ -113,17 +165,16 @@ class BookingForm extends Component {
                                                 </div>
                                             </div>
                                         </div>
-                                        <button type="submit" className="btn btn-secondary mt" onSubmit={this.handleSubmit}>Book Now</button>                                    </form>
+                                        <button type="submit" className="btn btn-secondary mt">Submit</button> 
+                                    </form>                                  
                                 </div>
                             </div>
                         </div>
                     </div>
-
-
-
                 </div>
             </div>
         )
+         }
     }
 }
 

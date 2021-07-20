@@ -3,9 +3,11 @@ import './Home.css';
 import Navigation from './Navigation';
 import { Navbar, Nav, Container, NavDropdown } from 'react-bootstrap';
 import axios from "axios";
+import { useHistory, useParams} from 'react-router-dom';
 
 function Home(){
     const [hotelData, getData] = useState([]);
+    const history = useHistory()
     useEffect(() =>{
         getHotelData();
         // console.log(this.state.hotel_data,'hotel')
@@ -36,8 +38,11 @@ function Home(){
             }
         })
     }
-   
-    
+
+    const bookingHandler=(id)=>{
+        console.log("bookingHandler",id)
+        history.push(`/BookingForm/${id}`);
+    }
 
         return (
             <div>
@@ -71,8 +76,8 @@ function Home(){
                                             {/* <p className="card-text">Situated in Bangalore, 21 km from Commercial Street, Holiday Inn Express & Suites Bengaluru Old Madras Road, an IHG Hotel features accommodation with a restaurant, free private parking, a fitness..</p> */}
                                             {/* <a href="http://localhost:4000/BookingForm" className="btn btn-sm btn-primary" >Book Now</a> */}
                                             <p className="card-text">{hotel.description}</p>
-{localStorage.getItem("authorization") != undefined ?<a href="http://localhost:4000/BookingForm" className="btn btn-sm btn-primary" >Book Now</a>:
-                                            <a href="http://localhost:4000/LoginForm" className="btn btn-sm btn-primary" >Book Now</a>}
+{localStorage.getItem("authorization") != undefined ?<button onClick={()=>bookingHandler(hotel._id)} className="btn btn-sm btn-primary" >Book Now</button>:
+                                            <button onClick={()=>bookingHandler(hotel._id)} className="btn btn-sm btn-primary" >Book Now</button>}
 
                                         </div>
                                     </div>

@@ -133,7 +133,7 @@ class Registration extends Component {
                                                 <label className="form-label">Name<span className="text-danger">*</span></label>
                                                 <input type="text" placeholder="Enter Name" className="form-control" id="username" name="username" onBlur={this.form.handleBlurEvent} onChange={this.form.handleChangeEvent} value={this.state.fields.username} data-attribute-name="name" />
 
-                                                <small className="errors">
+                                                <small className="error">
                                                     {this.state.errors.username ? this.state.errors.username : ""}
                                                 </small>
                                             </div>

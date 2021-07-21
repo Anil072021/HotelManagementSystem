@@ -7,6 +7,8 @@ import LoginForm from "./LoginForm";
 import Navigation from './Navigation';
 import { Redirect } from 'react-router-dom';
 import axios from "axios";
+import Footer from "./Footer";
+
 
 class Registration extends Component {
     constructor(props) {
@@ -105,7 +107,7 @@ class Registration extends Component {
     render() {
 
         if (this.state.isRedirectohome === true) {
-            return <Redirect to="/LoginForm/" />
+            return <Redirect to="/" />
         }
 
         else {
@@ -180,6 +182,7 @@ class Registration extends Component {
                             </div>
                         </div>
                     </div>
+                    <Footer/>
                 </div>
             )
         }

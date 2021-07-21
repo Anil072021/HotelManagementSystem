@@ -192,7 +192,7 @@ height: 50;
 }
 
 .bg{
-  background-image: url("https://th.bing.com/th/id/R.6d3b06161693115981ed37197d4db828?rik=OBe%2bJL8BQckzEQ&riu=http%3a%2f%2f2.bp.blogspot.com%2f-76D7Uv5fJ44%2fUkJauZ7uyNI%2fAAAAAAAAA2U%2f6owdYbA_G3o%2fs1600%2fAmazing%2bsunset%2bFb%2bCovers%2b(6).jpg&ehk=%2b%2fUU5OxxI5SeS1bv6Xm2EVwqLHqoAdj%2byccSx4hGJk0%3d&risl=&pid=ImgRaw");
+  background-image: url("https://th.bing.com/th/id/R.0bcde254e9875a5573a57b702dcfccf7?rik=BsqQVvR9SqW4kg&riu=http%3a%2f%2f4.bp.blogspot.com%2f-xZ7lRtGI5D0%2fUFYQJ-9uftI%2fAAAAAAAAE40%2fbQMdjjpbO1U%2fs1600%2fbokeh-background_facebook_timeline_cover.jpg&ehk=yxKEAUIz4i5H5lf0wwMSSeAXoDPamUq4u7VXqwfsos0%3d&risl=&pid=ImgRaw");
   /* Full height */
   height: 100%;
   width: 100%;
@@ -215,6 +215,10 @@ height: 50;
 .btn-color{
   background-color:rgb(228, 145, 36);
   color:black;
+}
+
+.mt{
+  margin-top: 3rem;
 }
 
 

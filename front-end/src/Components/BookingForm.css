@@ -25,3 +25,13 @@
 .mb-10{
     margin-bottom: 4vh;
 }
+.bookingBg{
+  background-image: url("https://th.bing.com/th/id/R.0bcde254e9875a5573a57b702dcfccf7?rik=BsqQVvR9SqW4kg&riu=http%3a%2f%2f4.bp.blogspot.com%2f-xZ7lRtGI5D0%2fUFYQJ-9uftI%2fAAAAAAAAE40%2fbQMdjjpbO1U%2fs1600%2fbokeh-background_facebook_timeline_cover.jpg&ehk=yxKEAUIz4i5H5lf0wwMSSeAXoDPamUq4u7VXqwfsos0%3d&risl=&pid=ImgRaw");
+  /* Full height */
+  height: 100%;
+  width: 100%;
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}

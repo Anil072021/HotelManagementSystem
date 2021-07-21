@@ -9,8 +9,8 @@ import LoginForm from './LoginForm';
 
 class Navigation extends Component {
     state = {
-        user_name: localStorage.getItem('user_name'),
-        show : false,
+        // user_name: localStorage.getItem('email'),
+        show: false,
     }
     logoutHandler = (e) => {
         localStorage.removeItem('data')
@@ -20,18 +20,18 @@ class Navigation extends Component {
         window.location.reload();
     }
 
-     handleShow = () => {
-        this.setState({show: true});
+    handleShow = () => {
+        this.setState({ show: true });
     }
     handleClose = () => {
-        this.setState({show: false});
+        this.setState({ show: false });
     }
     render() {
         console.log(this.props, "okokok")
         return (
             <div>
                 <Navbar bg="dark" expand="lg" className=" nav navbar">
-                    <Navbar.Brand href="/Home" className="text-info"><b>BookHotels.com</b></Navbar.Brand>
+                    <Navbar.Brand href="http://localhost:4000/" className="text-info"><b>BookHotels.com</b></Navbar.Brand>
                     <Navbar.Toggle aria-controls="navbarScroll" />
                     <Navbar.Collapse id="navbarScroll">
                         <div className="">
@@ -43,18 +43,18 @@ class Navigation extends Component {
                                     aria-label="Search" />
                             </Form>
                         </div>
-                        {localStorage.getItem("authorization") != undefined ? <ul className="navbar-nav ml-auto">
-                            <li className="nav-item active">
-                                <a className="ranjith ml-auto" href="" onClick={e => this.logoutHandler(e)}>Logout</a>
-                            </li>
-                        </ul> : <NavDropdown title="Profile" className="profileMargin" id="basic-nav-dropdown">
-                            <NavDropdown.Item href="/LoginForm">Signin</NavDropdown.Item>
-                            <NavDropdown.Item href="/Registration">Signup</NavDropdown.Item>
-                        </NavDropdown>}
+                        {localStorage.getItem("authorization") != undefined ?
+                            <NavDropdown title="Profile" className="profileMargin" id="basic-nav-dropdown">
+                                <NavDropdown.Item >{localStorage.getItem('email')}</NavDropdown.Item>
+                                <NavDropdown.Item onClick={e => this.logoutHandler(e)}>Logout</NavDropdown.Item>
+                            </NavDropdown>
+                            : <NavDropdown title="Signin/Signup" className="profileMargin" id="basic-nav-dropdown">
+                                <NavDropdown.Item onClick={this.handleShow}>Signin</NavDropdown.Item>
+                                <NavDropdown.Item href="/Registration">Signup</NavDropdown.Item>
+                            </NavDropdown>}
                     </Navbar.Collapse>
                 </Navbar>
-                <LoginForm show={this.state.show} handleShow={this.handleShow} handleClose={this.handleClose}  />
-
+                <LoginForm show={this.state.show} handleShow={this.handleShow} handleClose={this.handleClose} />
             </div>
         );
     }
